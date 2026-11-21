@@ -143,8 +143,15 @@ async function unmount(
 async function pickPdf(
   c: ReactTestRenderer.ReactTestRenderer,
 ): Promise<void> {
+  // Await the handler's promise INSIDE act: recognizePdf/purge resolve on
+  // setTimeout(0) macrotasks, so act's microtask flush alone would close
+  // before setPhase('done') runs — the final update would leak outside.
+  let started: Promise<void> | undefined;
   await act(async () => {
-    c.root.findByProps({testID: 'upload-pick'}).props.onPress();
+    started = c.root
+      .findByProps({testID: 'upload-pick'})
+      .props.onPress() as unknown as Promise<void>;
+    await started;
   });
   await tick();
 }
