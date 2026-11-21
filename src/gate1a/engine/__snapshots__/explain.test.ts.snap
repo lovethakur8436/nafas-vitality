@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`per-tier snapshots (mock model top-3 → 3 sentences) ELEVATED tier 1`] = `
+[
+  "Your BMI is higher than the reference range — this is the biggest factor in this estimate.",
+  "Your waist-to-height ratio is higher than the reference range — this is the second biggest factor in this estimate.",
+  "Your age is higher than the reference range — this is the third biggest factor in this estimate.",
+]
+`;
+
+exports[`per-tier snapshots (mock model top-3 → 3 sentences) HIGH tier 1`] = `
+[
+  "Your HbA1c is higher than the reference range — this is the biggest factor in this estimate.",
+  "You reported high blood pressure (hypertension) — this is the second biggest factor in this estimate.",
+  "Your BMI is higher than the reference range — this is the third biggest factor in this estimate.",
+]
+`;
+
+exports[`per-tier snapshots (mock model top-3 → 3 sentences) LOW tier 1`] = `
+[
+  "Your HDL cholesterol is lower than the reference range — this is the biggest factor in this estimate.",
+  "Your age is higher than the reference range — this is the second biggest factor in this estimate.",
+  "This factor does not push this estimate up.",
+]
+`;

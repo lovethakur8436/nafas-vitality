@@ -1,0 +1,28 @@
+{
+  "name": "nafas-vitality",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Nafas Vitality — Edge-Native Preventive Health. Gate 1A: Passive Metabolic Radar (100% on-device).",
+  "scripts": {
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "test": "jest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-native": "^0.88.1",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@react-native/babel-preset": "^0.88.1",
+    "@react-native/jest-preset": "^0.88.1",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-test-renderer": "^19.3.1",
+    "jest": "^30.5.2",
+    "react-test-renderer": "^19.3.1",
+    "typescript": "^7.0.2"
+  }
+}
