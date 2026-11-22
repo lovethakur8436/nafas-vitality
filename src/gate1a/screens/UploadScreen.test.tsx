@@ -34,7 +34,9 @@ const tick = (): Promise<void> => new Promise(resolve =>
 const fastOcr = (): MockLabOCRService => new MockLabOCRService({latencyMs: 0});
 
 beforeEach(() => {
-  useGate1AStore.setState(GATE1A_INITIAL_STATE);
+  act(() => {
+    useGate1AStore.setState(GATE1A_INITIAL_STATE);
+  });
 });
 
 describe('UploadScreen — happy path (pick → OCR → CONFIRMING + purge)', () => {
@@ -68,7 +70,9 @@ describe('UploadScreen — happy path (pick → OCR → CONFIRMING + purge)', ()
     expect(ocr.purgedUris).toContain(uri);
     // The screen hands off to the confirm step.
     expect(JSON.stringify(c.toJSON())).toContain('Reading complete');
-    c.unmount();
+    act(() => {
+      c.unmount();
+    });
   });
 });
 
@@ -118,7 +122,9 @@ describe('UploadScreen — OCR progress', () => {
     expect(real.purgedUris).toContain(uri);
     tree = JSON.stringify(c.toJSON());
     expect(tree).toContain('Reading complete');
-    c.unmount();
+    act(() => {
+      c.unmount();
+    });
   });
 });
 
@@ -155,7 +161,9 @@ describe('UploadScreen — picker cancelled', () => {
     expect(picker.picked).toEqual([null]);
     // Still on the idle view.
     expect(JSON.stringify(c.toJSON())).toContain('Select lab report');
-    c.unmount();
+    act(() => {
+      c.unmount();
+    });
   });
 });
 
@@ -190,6 +198,8 @@ describe('UploadScreen — OCR failure', () => {
     // The machine is back at IDLE so a re-pick works.
     expect(useGate1AStore.getState().state).toBe('IDLE');
     expect(useGate1AStore.getState().pdfUri).toBeNull();
-    c.unmount();
+    act(() => {
+      c.unmount();
+    });
   });
 });

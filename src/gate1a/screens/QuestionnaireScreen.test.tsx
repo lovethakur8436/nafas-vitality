@@ -43,9 +43,11 @@ const EXTRACT: OcrExtraction = {
 };
 
 function intoConfirming(): void {
-  useGate1AStore.getState().loadPdf('file:///tmp/lab.pdf');
-  useGate1AStore.getState().startOcr();
-  useGate1AStore.getState().ocrComplete(EXTRACT);
+  act(() => {
+    useGate1AStore.getState().loadPdf('file:///tmp/lab.pdf');
+    useGate1AStore.getState().startOcr();
+    useGate1AStore.getState().ocrComplete(EXTRACT);
+  });
 }
 
 /** Confirm all six panel values with their OCR draft values (→ still CONFIRMING). */
@@ -57,7 +59,9 @@ function confirmAll(): void {
 }
 
 beforeEach(() => {
-  useGate1AStore.setState(GATE1A_INITIAL_STATE);
+  act(() => {
+    useGate1AStore.setState(GATE1A_INITIAL_STATE);
+  });
 });
 
 describe('QuestionnaireScreen — vector assembly + scoring', () => {
@@ -132,6 +136,8 @@ describe('QuestionnaireScreen — vector assembly + scoring', () => {
     expect(Number.isFinite(v!.derived.bmi)).toBe(true);
     expect(Number.isFinite(v!.derived.whtr)).toBe(true);
     expect(Number.isFinite(v!.derived.tyg_index)).toBe(true);
-    c.unmount();
+    act(() => {
+      c.unmount();
+    });
   });
 });

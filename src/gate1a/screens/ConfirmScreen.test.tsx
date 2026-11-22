@@ -57,13 +57,17 @@ const NOISY: OcrExtraction = {
 };
 
 function intoConfirming(extraction: OcrExtraction): void {
-  useGate1AStore.getState().loadPdf('file:///tmp/lab.pdf');
-  useGate1AStore.getState().startOcr();
-  useGate1AStore.getState().ocrComplete(extraction);
+  act(() => {
+    useGate1AStore.getState().loadPdf('file:///tmp/lab.pdf');
+    useGate1AStore.getState().startOcr();
+    useGate1AStore.getState().ocrComplete(extraction);
+  });
 }
 
 beforeEach(() => {
-  useGate1AStore.setState(GATE1A_INITIAL_STATE);
+  act(() => {
+    useGate1AStore.setState(GATE1A_INITIAL_STATE);
+  });
 });
 
 describe('ConfirmScreen — edit overrides OCR source', () => {
@@ -92,7 +96,9 @@ describe('ConfirmScreen — edit overrides OCR source', () => {
     expect(lv.value).toBe(6.2);
     expect(lv.source).toBe('manual');
     expect(lv.confidence).toBe(1.0);
-    c.unmount();
+    act(() => {
+      c.unmount();
+    });
   });
 });
 
@@ -122,14 +128,18 @@ describe('ConfirmScreen — all-values gate', () => {
     });
     await tick();
     expect(allBtnDisabled()).toBe(false);
-    c.unmount();
+    act(() => {
+      c.unmount();
+    });
   });
 });
 
 describe('ConfirmScreen — manual-entry fallback', () => {
   it('renders the manual form (no confidence badges) and enters MANUAL_ENTRY', async () => {
-    intoConfirming(NOISY);
-    expect(useGate1AStore.getState().manualFallback).toBe(true);
+   act(() => {
+       	  intoConfirming(NOISY);
+   });
+       	  expect(useGate1AStore.getState().manualFallback).toBe(true);
 
     const c = await act(async () => ReactTestRenderer.create(<ConfirmScreen />));
     await tick();
@@ -143,6 +153,8 @@ describe('ConfirmScreen — manual-entry fallback', () => {
     expect(
       c.root.findAllByProps({testID: 'confirm-badge-hba1c'}),
     ).toHaveLength(0);
-    c.unmount();
+    act(() => {
+      c.unmount();
+    });
   });
 });
